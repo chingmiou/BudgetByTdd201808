@@ -27,9 +27,16 @@ namespace BudgetByTdd
         }
 
         [TestMethod]
-        public void no_overlap_before_budget_firstday()
+        public void no_overlap_period_before_budget_firstday()
         {
             GivenBudgets(new Budget { YearMonth = "201807", Amount = 31 });
+            AmountShouldBe(0m, "20180601", "20180601");
+        }
+
+        [TestMethod]
+        public void no_overlap_period_after_budget_lastday()
+        {
+            GivenBudgets(new Budget { YearMonth = "201805", Amount = 31 });
             AmountShouldBe(0m, "20180601", "20180601");
         }
 
@@ -60,6 +67,15 @@ namespace BudgetByTdd
         public DateTime FirstDay
         {
             get { return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null); }
+        }
+
+        public DateTime LastDay
+        {
+            get
+            {
+                var daysInMonth = DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
+                return DateTime.ParseExact(YearMonth + daysInMonth, "yyyyMMdd", null);
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace BudgetByTdd
             if (budgets.Any())
             {
                 var budget = budgets[0];
-                if (period.End < budget.FirstDay)
+                if (period.End < budget.FirstDay || period.Start > budget.LastDay)
                 {
                     return 0;
                 }
