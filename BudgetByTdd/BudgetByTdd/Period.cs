@@ -19,7 +19,7 @@ namespace BudgetByTdd
 
         public decimal OverlappingDays(Period otherPeriod)
         {
-            if (End < otherPeriod.Start || Start > otherPeriod.End)
+            if (HasNoOverlap(otherPeriod))
             {
                 return 0;
             }
@@ -28,6 +28,11 @@ namespace BudgetByTdd
             var overlapEnd = End < otherPeriod.End ? End : otherPeriod.End;
 
             return (overlapEnd - overlapStart).Days + 1;
+        }
+
+        private bool HasNoOverlap(Period otherPeriod)
+        {
+            return End < otherPeriod.Start || Start > otherPeriod.End;
         }
     }
 }
