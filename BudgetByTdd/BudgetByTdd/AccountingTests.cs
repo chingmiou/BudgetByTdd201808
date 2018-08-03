@@ -54,6 +54,15 @@ namespace BudgetByTdd
             AmountShouldBe(1m, "20180430", "20180501");
         }
 
+        [ExpectedException(typeof(ArgumentException))]
+        [TestMethod]
+        public void invalid_period()
+        {
+            var start = DateTime.ParseExact("20180501", "yyyyMMdd", null);
+            var end = DateTime.ParseExact("20170501", "yyyyMMdd", null);
+            _accounting.TotalAmount(start, end);
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _budgetRepository.GetAll().Returns(budgets.ToList());
