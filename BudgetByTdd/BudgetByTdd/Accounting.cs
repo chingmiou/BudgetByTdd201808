@@ -3,38 +3,6 @@ using System.Linq;
 
 namespace BudgetByTdd
 {
-    public class Period
-    {
-        public Period(DateTime start, DateTime end)
-        {
-            Start = start;
-            End = end;
-        }
-
-        public DateTime Start { get; private set; }
-        public DateTime End { get; private set; }
-
-        public int Days()
-        {
-            return (End - Start).Days + 1;
-        }
-
-        public decimal OverlappingDays(Budget budget)
-        {
-            if (HasNoOverlap(budget))
-            {
-                return 0;
-            }
-
-            return Days();
-        }
-
-        private bool HasNoOverlap(Budget budget)
-        {
-            return End < budget.FirstDay || Start > budget.LastDay;
-        }
-    }
-
     public class Accounting
     {
         private IBudgetRepository _budgetRepository;
