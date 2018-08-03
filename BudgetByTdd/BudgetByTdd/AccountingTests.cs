@@ -25,7 +25,7 @@ namespace BudgetByTdd
         }
 
         [TestInitialize]
-        private void TestInit()
+        public void TestInit()
         {
             _accounting = new Accounting(_budgetRepository);
         }
