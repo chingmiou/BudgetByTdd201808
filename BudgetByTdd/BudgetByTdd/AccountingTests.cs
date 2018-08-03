@@ -54,6 +54,13 @@ namespace BudgetByTdd
             AmountShouldBe(1m, "20180430", "20180501");
         }
 
+        [TestMethod]
+        public void dailyAmount_not_1()
+        {
+            GivenBudgets(new Budget { YearMonth = "201805", Amount = 62 });
+            AmountShouldBe(6m, "20180501", "20180503");
+        }
+
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
         public void invalid_period()
@@ -79,26 +86,6 @@ namespace BudgetByTdd
         public void TestInit()
         {
             _accounting = new Accounting(_budgetRepository);
-        }
-    }
-
-    public class Budget
-    {
-        public string YearMonth { get; set; }
-        public int Amount { get; set; }
-
-        public DateTime FirstDay
-        {
-            get { return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null); }
-        }
-
-        public DateTime LastDay
-        {
-            get
-            {
-                var daysInMonth = DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
-                return DateTime.ParseExact(YearMonth + daysInMonth, "yyyyMMdd", null);
-            }
         }
     }
 }
