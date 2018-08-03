@@ -25,19 +25,19 @@ namespace BudgetByTdd
             get { return DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month); }
         }
 
-        public int DailyAmount()
+        private int DailyAmount()
         {
             return Amount / DaysInMonth;
         }
 
-        public Period PeriodFromBudget()
+        private Period GetPeriod()
         {
             return new Period(FirstDay, LastDay);
         }
 
         public decimal OverlapAmount(Period period)
         {
-            return period.OverlappingDays(PeriodFromBudget()) * DailyAmount();
+            return period.OverlappingDays(GetPeriod()) * DailyAmount();
         }
     }
 }
