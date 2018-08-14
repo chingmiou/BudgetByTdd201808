@@ -19,8 +19,15 @@ namespace BudgetByTdd
         {
             get
             {
-                var daysInMonth = DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
-                return DateTime.ParseExact(YearMonth + daysInMonth, "yyyyMMdd", null);
+                return DateTime.ParseExact(YearMonth + DaysInMonth, "yyyyMMdd", null);
+            }
+        }
+
+        public int DaysInMonth
+        {
+            get
+            {
+                return DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
             }
         }
     }
