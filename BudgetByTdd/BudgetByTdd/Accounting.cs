@@ -14,19 +14,8 @@ namespace BudgetByTdd
 
         public decimal TotalAmount(DateTime start, DateTime end)
         {
-            var budgets = _budgetRepository.GetAll();
             var period = new Period(start, end);
-            if (budgets.Any())
-            {
-                var total = 0m;
-                foreach (var budget in budgets)
-                {
-                    var amount = budget.OverlapAmount(period);
-                    total += amount;
-                }
-                return total;
-            }
-            return 0;
+            return _budgetRepository.GetAll().Sum(x => x.OverlapAmount(period));
         }
     }
 }
