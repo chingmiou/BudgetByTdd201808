@@ -23,8 +23,14 @@ namespace BudgetByTdd
         public void period_inside_budget_month()
         {
             GivenBudgets(new Budget { YearMonth = "201806", Amount = 30 });
-
             AmountShouldBe(1m, "20180601", "20180601");
+        }
+
+        [TestMethod]
+        public void no_overlap_period_before_budget_firstday()
+        {
+            GivenBudgets(new Budget { YearMonth = "201807", Amount = 31 });
+            AmountShouldBe(0m, "20180601", "20180601");
         }
 
         private void GivenBudgets(params Budget[] budgets)
