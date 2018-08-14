@@ -6,6 +6,10 @@ namespace BudgetByTdd
     {
         public Period(DateTime start, DateTime end)
         {
+            if (end < start)
+            {
+                throw new ArgumentException();
+            }
             Start = start;
             End = end;
         }
