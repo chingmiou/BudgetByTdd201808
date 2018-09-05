@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace BudgetByTdd
+﻿namespace BudgetByTdd
 {
     public interface IBudgetRepository
     {
-        List<Budget> GetAll();
     }
 }
