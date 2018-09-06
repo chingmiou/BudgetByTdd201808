@@ -9,13 +9,20 @@ namespace BudgetByTdd
     [TestClass]
     public class AccountingTests
     {
-        private IBudgetRepository _budgetRepository = Substitute.For<IBudgetRepository>();
         private Accounting _accounting;
+        private IBudgetRepository _budgetRepository = Substitute.For<IBudgetRepository>();
 
         [TestMethod]
         public void no_budgets()
         {
             GivenBudgets();
+            AmountShouldBe(0m, "20180601", "20180601");
+        }
+
+        [TestMethod]
+        public void no_period_overlap_before_budget_firstday()
+        {
+            GivenBudgets(new Budget { YearMonth = "201807", Amount = 31 });
             AmountShouldBe(0m, "20180601", "20180601");
         }
 
@@ -26,9 +33,10 @@ namespace BudgetByTdd
             AmountShouldBe(1m, "20180601", "20180601");
         }
 
-        private void GivenBudgets(params Budget[] budgets)
+        [TestInitialize]
+        public void TestInit()
         {
-            _budgetRepository.GetAll().Returns(budgets.ToList());
+            _accounting = new Accounting(_budgetRepository);
         }
 
         private void AmountShouldBe(decimal expected, string startTime, string endTime)
@@ -39,10 +47,9 @@ namespace BudgetByTdd
             Assert.AreEqual(expected, totalAmount);
         }
 
-        [TestInitialize]
-        public void TestInit()
+        private void GivenBudgets(params Budget[] budgets)
         {
-            _accounting = new Accounting(_budgetRepository);
+            _budgetRepository.GetAll().Returns(budgets.ToList());
         }
     }
 }
