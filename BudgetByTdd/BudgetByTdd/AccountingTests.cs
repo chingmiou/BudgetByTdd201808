@@ -34,6 +34,13 @@ namespace BudgetByTdd
         }
 
         [TestMethod]
+        public void period_overlap_budget_lastday()
+        {
+            GivenBudgets(new Budget { YearMonth = "201805", Amount = 31 });
+            AmountShouldBe(1m, "20180531", "20180601");
+        }
+
+        [TestMethod]
         public void period_inside_budget_month()
         {
             GivenBudgets(new Budget { YearMonth = "201806", Amount = 30 });
