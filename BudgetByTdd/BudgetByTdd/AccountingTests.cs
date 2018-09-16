@@ -48,6 +48,16 @@ namespace BudgetByTdd
         }
 
         [TestMethod]
+        public void multiple_budgets()
+        {
+            GivenBudgets(
+                new Budget { YearMonth = "201805", Amount = 31 },
+                new Budget { YearMonth = "201806", Amount = 300 }
+            );
+            AmountShouldBe(27m, "20180525", "20180602");
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void invalid_period()
         {
