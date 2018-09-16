@@ -41,6 +41,15 @@ namespace BudgetByTdd
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void invalid_period()
+        {
+            var startTIme = DateTime.ParseExact("20180501", "yyyyMMdd", null);
+            var endTIme = DateTime.ParseExact("20170503", "yyyyMMdd", null);
+            _accounting.TotalAmount(startTIme, endTIme);
+        }
+
+        [TestMethod]
         public void period_overlap_budget_firstday()
         {
             GivenBudgets(new Budget { YearMonth = "201805", Amount = 31 });
