@@ -31,10 +31,10 @@ namespace BudgetByTdd
 
         public decimal OverlapAmount(Period period)
         {
-            return period.OverlappingDays(PeriodFromBudget()) * DailyAmount();
+            return period.OverlappingDays(GetPeriod()) * DailyAmount();
         }
 
-        private Period PeriodFromBudget()
+        private Period GetPeriod()
         {
             return new Period(FirstDay, LastDay);
         }
