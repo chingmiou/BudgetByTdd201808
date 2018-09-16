@@ -41,6 +41,13 @@ namespace BudgetByTdd
         }
 
         [TestMethod]
+        public void dailyAmount_not_1()
+        {
+            GivenBudgets(new Budget { YearMonth = "201805", Amount = 62 });
+            AmountShouldBe(6m, "20180501", "20180503");
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void invalid_period()
         {
