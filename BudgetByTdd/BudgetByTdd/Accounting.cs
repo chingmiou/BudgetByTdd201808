@@ -23,7 +23,7 @@ namespace BudgetByTdd
 
                 foreach (var budget in budgets)
                 {
-                    var overlapAmount = budget.DailyAmount() * period.OverlappingDays(new Period(budget.FirstDay, budget.LastDay));
+                    var overlapAmount = budget.OverlapAmount(period);
                     total += overlapAmount;
                 }
                 return total;
