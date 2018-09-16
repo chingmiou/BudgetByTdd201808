@@ -20,7 +20,7 @@ namespace BudgetByTdd
                 return 0;
             }
 
-            var overlapStart = Start;
+            var overlapStart = Start < budget.FirstDay ? budget.FirstDay : Start;
             var overlapEnd = End > budget.LastDay ? budget.LastDay : End;
 
             return (overlapEnd - overlapStart).Days + 1;
